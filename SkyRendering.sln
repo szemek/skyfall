@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyRendering", "SkyRendering\SkyRendering\SkyRendering.csproj", "{B89C6CA1-7835-43B3-B6D8-EDA787459B58}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SkyRenderingContent", "SkyRendering\SkyRenderingContent\SkyRenderingContent.contentproj", "{58614BCF-5B63-4899-B4A9-49582DB1B6F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B89C6CA1-7835-43B3-B6D8-EDA787459B58}.Debug|x86.ActiveCfg = Debug|x86
+		{B89C6CA1-7835-43B3-B6D8-EDA787459B58}.Debug|x86.Build.0 = Debug|x86
+		{B89C6CA1-7835-43B3-B6D8-EDA787459B58}.Release|x86.ActiveCfg = Release|x86
+		{B89C6CA1-7835-43B3-B6D8-EDA787459B58}.Release|x86.Build.0 = Release|x86
+		{58614BCF-5B63-4899-B4A9-49582DB1B6F5}.Debug|x86.ActiveCfg = Debug|x86
+		{58614BCF-5B63-4899-B4A9-49582DB1B6F5}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,5 @@
+*.exe
+*.pdb
+SkyRendering/SkyRendering/bin/*
+SkyRendering/SkyRendering/obj/*
+SkyRendering/SkyRenderingContent/obj/*
