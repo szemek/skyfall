@@ -49,6 +49,11 @@ namespace Sky
         int phiSteps, thetaSteps;
         int[] triStrips;
 
+        public float Turbidity  = 3.0f;
+        public float ThetaSun = 1.1f;
+        public float PhiSun = 3.9f;
+
+
         public SkyDome(GraphicsDevice dev, IServiceProvider services)
         {
             device = dev;
@@ -58,13 +63,13 @@ namespace Sky
 
             effect = Content.Load<Effect>("skydome");
 
-            genVertices(30, 10);
+            genVertices(30, 15);
         }
 
 
         private void genVertices(int phiSteps, int thetaSteps)
         {
-            int nVerts = phiSteps - thetaSteps + 3; // triangle fan
+            int nVerts = 3 * (phiSteps - thetaSteps + 1); // triangle fan
             triStrips = new int[thetaSteps];
             this.phiSteps = phiSteps;
             this.thetaSteps = thetaSteps;
@@ -81,17 +86,17 @@ namespace Sky
             SkyVertex[] verts = new SkyVertex[nVerts];
 
 	        int idx = 0;
-
-	        verts[idx++] = new SkyVertex(0, 1, 0, 0, 0); // triangle fan
 	
 	        int res = phiSteps - thetaSteps + 1;
             float phiStep = 2 * (float)Math.PI / (float)res;
             float thetaStep = 0.5f * (float)Math.PI / (float)thetaSteps;
 	        float phi = 0;
 
-	        for(int i=0; i<res+1; i++) // triangle fan
+	        for(int i=0; i<res; i++) // triangle fan
 	        {
+                verts[idx++] = new SkyVertex(0, 1, 0, phi, 0); // triangle fan
 		        verts[idx++] = new SkyVertex(phi, thetaStep);
+                verts[idx++] = new SkyVertex(phi + phiStep, thetaStep);
 		
 		        phi += phiStep;
 	        }
@@ -124,25 +129,89 @@ namespace Sky
         }
 
 
-        public void Render(Matrix world, Matrix view, Matrix proj)
+        void setParameters()
         {
-            effect.Parameters["World"].SetValue(world);
-            effect.Parameters["View"].SetValue(view);
-            effect.Parameters["Projection"].SetValue(proj);
+            float[] coeffY = new float[5];
+            float[] coeffx = new float[5];
+            float[] coeffy = new float[5];
+
+	        coeffY[0] =  0.1787f * Turbidity - 1.4630f;
+	        coeffY[1] = -0.3554f * Turbidity + 0.4275f;
+	        coeffY[2] = -0.0227f * Turbidity + 5.3251f;
+	        coeffY[3] =  0.1206f * Turbidity - 2.5771f;
+	        coeffY[4] = -0.0670f * Turbidity + 0.3703f;
+
+	        coeffx[0] = -0.0193f * Turbidity - 0.2592f;
+	        coeffx[1] = -0.0665f * Turbidity + 0.0008f;
+	        coeffx[2] = -0.0004f * Turbidity + 0.2125f;
+	        coeffx[3] = -0.0641f * Turbidity - 0.8989f;
+	        coeffx[4] = -0.0033f * Turbidity + 0.0452f;
+
+	        coeffy[0] = -0.0167f * Turbidity - 0.2608f;
+	        coeffy[1] = -0.0950f * Turbidity + 0.0092f;
+	        coeffy[2] = -0.0079f * Turbidity + 0.2102f;
+	        coeffy[3] = -0.0441f * Turbidity - 1.6537f;
+	        coeffy[4] = -0.0109f * Turbidity + 0.0529f;
+
+            effect.Parameters["coeffx"].SetValue(coeffx);
+            effect.Parameters["coeffy"].SetValue(coeffy);
+            effect.Parameters["coeffY"].SetValue(coeffY);
+
+
+	        float chi = (4/9.0f - Turbidity/120.0f) * ((float)Math.PI - 2 * ThetaSun);
+	        float zenithY = (4.0453f * Turbidity - 4.9710f) * (float)Math.Tan(chi) - 0.2155f * Turbidity + 2.4192f;
+
+            float thetaS2 = ThetaSun * ThetaSun;
+            float thetaS3 = thetaS2 * ThetaSun;
+	        float T2 = Turbidity * Turbidity;
+
+            float zenithx = T2 * (0.00166f * thetaS3 - 0.00375f * thetaS2 + 0.00209f * ThetaSun) +
+                Turbidity * (-0.02903f * thetaS3 + 0.06377f * thetaS2 - 0.03202f * ThetaSun + 0.00394f) +
+                              (0.11693f * thetaS3 - 0.21196f * thetaS2 + 0.06052f * ThetaSun + 0.25886f);
+
+            float zenithy = T2 * (0.00275f * thetaS3 - 0.00610f * thetaS2 + 0.00317f * ThetaSun) +
+                Turbidity * (-0.04214f * thetaS3 + 0.08970f * thetaS2 - 0.04153f * ThetaSun + 0.00516f) +
+                              (0.15346f * thetaS3 - 0.26756f * thetaS2 + 0.06670f * ThetaSun + 0.26688f);
+
+            effect.Parameters["zenithx"].SetValue(zenithx);
+            effect.Parameters["zenithy"].SetValue(zenithy);
+            effect.Parameters["zenithY"].SetValue(zenithY);
+
+            effect.Parameters["thetaS"].SetValue(ThetaSun);
+	        effect.Parameters["phiS"].SetValue(PhiSun);
+	        effect.Parameters["turbidity"].SetValue(Turbidity);
+
+            Matrix xyztorgb = new Matrix(); // adobe rgb 1998
+            xyztorgb.M11 = 3.240479f;  xyztorgb.M21 = -1.53715f;  xyztorgb.M31 = -0.49853f;
+            xyztorgb.M12 = -0.969256f; xyztorgb.M22 = 1.875991f;  xyztorgb.M32 = 0.041556f;
+            xyztorgb.M13 = 0.055648f;  xyztorgb.M23 = -0.204043f; xyztorgb.M33 = 1.057311f;
+            effect.Parameters["XYZtoRGB"].SetValue(xyztorgb);
+        }
+
+
+
+        public void Render(Matrix view, Matrix proj)
+        {
+            device.DepthStencilState = DepthStencilState.DepthRead;
+
+            setParameters();
+            Matrix world = Matrix.CreateTranslation(0, -0.3f, 0);
+            effect.Parameters["viewProj"].SetValue(world * view * proj);
 
             effect.CurrentTechnique.Passes[0].Apply();
 
             device.SetVertexBuffer(vBuffer);
 
-            //device.DrawPrimitives(PrimitiveType.TriangleList, 0, phiSteps - thetaSteps + 1);
+            device.DrawPrimitives(PrimitiveType.TriangleList, 0, phiSteps - thetaSteps + 1);
 
-            int offset = phiSteps - thetaSteps + 3;
+            int offset = 3 * (phiSteps - thetaSteps + 1);
             for (int i = 0; i < thetaSteps - 1; i++)
             {
-                //m_device->DrawPrimitive(D3DPT_TRIANGLESTRIP, offset, m_triStrips[i] - 2);
                 device.DrawPrimitives(PrimitiveType.TriangleStrip, offset, triStrips[i] - 2);
                 offset += triStrips[i];
             }
+
+            device.DepthStencilState = DepthStencilState.Default;
         }
 
     }

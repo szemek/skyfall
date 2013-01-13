@@ -40,6 +40,7 @@ namespace WinFormsGraphicsDevice
 
         VertexPositionColor [] bboxVertices;
         Sky.SkyDome skyDome;
+        public SkyDome SkyDome { get { return skyDome; } }
 
 
         // flags
@@ -67,7 +68,7 @@ namespace WinFormsGraphicsDevice
             this.MouseMove += new MouseEventHandler(MouseMoveHandler);
 
             clearColor = new Color(0.2f, 0.2f, 0.2f);
-            bboxColor = Color.GreenYellow;
+            bboxColor = Color.Red;
 
             bboxVertices = new VertexPositionColor[]
             {
@@ -131,12 +132,12 @@ namespace WinFormsGraphicsDevice
 
             float aspect = GraphicsDevice.Viewport.AspectRatio;
 
-            effect.World = Matrix.CreateRotationY(yawPitch.X) * Matrix.CreateRotationX(yawPitch.Y);
-            effect.View = Matrix.CreateLookAt(Vector3.Zero, new Vector3(0, 0, -2 - CameraDistance),
-                                              Vector3.Up);
+            effect.World = Matrix.Identity;
+            effect.View = Matrix.CreateRotationY(yawPitch.X) * Matrix.CreateRotationX(yawPitch.Y);
             effect.Projection = Matrix.CreatePerspectiveFieldOfView(1, aspect, 0.1f, 100.0f);
 
             //GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+            skyDome.Render(effect.View, effect.Projection);
 
             if (RenderBoundingBox)
             {
@@ -144,7 +145,7 @@ namespace WinFormsGraphicsDevice
                 GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineList, bboxVertices, 0, 12);
             }
 
-            skyDome.Render(effect.World, effect.View, effect.Projection);
+            
         }
 
     }

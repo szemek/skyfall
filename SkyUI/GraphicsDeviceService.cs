@@ -66,7 +66,7 @@ namespace WinFormsGraphicsDevice
             graphicsDevice = new GraphicsDevice(GraphicsAdapter.DefaultAdapter,
                                                 GraphicsProfile.HiDef,
                                                 parameters);
-            RasterizerState rs = new RasterizerState() { FillMode = FillMode.WireFrame, CullMode = CullMode.None };
+            RasterizerState rs = new RasterizerState() { FillMode = FillMode.Solid, CullMode = CullMode.None };
             graphicsDevice.RasterizerState = rs;
         }
 
