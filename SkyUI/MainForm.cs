@@ -78,5 +78,15 @@ namespace Skyfall
         {
             UpdateRenderControl();
         }
+
+        private void thetaTrackBar_Scroll(object sender, EventArgs e)
+        {
+            rendererControl.SkyDome.ThetaSun = (thetaTrackBar.Value / 100.0f) * (float) Math.PI;
+        }
+
+        private void phiTrackBar_Scroll(object sender, EventArgs e)
+        {
+            rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float) Math.PI * 2.0f;
+        }
     }
 }
