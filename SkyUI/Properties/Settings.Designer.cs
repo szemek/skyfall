@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tumor.Properties
+namespace Skyfall.Properties
 {
 
 

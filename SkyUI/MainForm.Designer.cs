@@ -1,4 +1,4 @@
-﻿namespace Tumor
+﻿namespace Skyfall
 {
     partial class MainForm
     {
@@ -215,7 +215,7 @@
             this.ClientSize = new System.Drawing.Size(883, 511);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
-            this.Text = "Tumor growth";
+            this.Text = "Skyfall";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.renderParams.ResumeLayout(false);
