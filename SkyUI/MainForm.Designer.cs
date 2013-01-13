@@ -40,6 +40,10 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.skyParams = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.thetaLabel = new System.Windows.Forms.Label();
+            this.phiLabel = new System.Windows.Forms.Label();
+            this.thetaTrackBar = new System.Windows.Forms.TrackBar();
+            this.phiTrackBar = new System.Windows.Forms.TrackBar();
             this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
             this.tabControl1.SuspendLayout();
             this.renderParams.SuspendLayout();
@@ -49,6 +53,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.thetaTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phiTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -65,6 +71,10 @@
             // 
             // renderParams
             // 
+            this.renderParams.Controls.Add(this.phiTrackBar);
+            this.renderParams.Controls.Add(this.thetaTrackBar);
+            this.renderParams.Controls.Add(this.phiLabel);
+            this.renderParams.Controls.Add(this.thetaLabel);
             this.renderParams.Controls.Add(this.label2);
             this.renderParams.Controls.Add(this.trackBarContrast);
             this.renderParams.Controls.Add(this.label1);
@@ -199,6 +209,46 @@
             this.splitContainer1.SplitterDistance = 634;
             this.splitContainer1.TabIndex = 2;
             // 
+            // thetaLabel
+            // 
+            this.thetaLabel.AutoSize = true;
+            this.thetaLabel.Location = new System.Drawing.Point(21, 267);
+            this.thetaLabel.Name = "thetaLabel";
+            this.thetaLabel.Size = new System.Drawing.Size(31, 13);
+            this.thetaLabel.TabIndex = 8;
+            this.thetaLabel.Text = "theta";
+            // 
+            // phiLabel
+            // 
+            this.phiLabel.AutoSize = true;
+            this.phiLabel.Location = new System.Drawing.Point(21, 302);
+            this.phiLabel.Name = "phiLabel";
+            this.phiLabel.Size = new System.Drawing.Size(21, 13);
+            this.phiLabel.TabIndex = 9;
+            this.phiLabel.Text = "phi";
+            // 
+            // thetaTrackBar
+            // 
+            this.thetaTrackBar.Location = new System.Drawing.Point(61, 267);
+            this.thetaTrackBar.Maximum = 100;
+            this.thetaTrackBar.Name = "thetaTrackBar";
+            this.thetaTrackBar.Size = new System.Drawing.Size(148, 45);
+            this.thetaTrackBar.TabIndex = 10;
+            this.thetaTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.thetaTrackBar.Value = 35;
+            this.thetaTrackBar.Scroll += new System.EventHandler(this.thetaTrackBar_Scroll);
+            // 
+            // phiTrackBar
+            // 
+            this.phiTrackBar.Location = new System.Drawing.Point(61, 302);
+            this.phiTrackBar.Maximum = 100;
+            this.phiTrackBar.Name = "phiTrackBar";
+            this.phiTrackBar.Size = new System.Drawing.Size(148, 45);
+            this.phiTrackBar.TabIndex = 11;
+            this.phiTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.phiTrackBar.Value = 62;
+            this.phiTrackBar.Scroll += new System.EventHandler(this.phiTrackBar_Scroll);
+            // 
             // rendererControl
             // 
             this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -226,6 +276,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.thetaTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.phiTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -245,6 +297,10 @@
         private System.Windows.Forms.TrackBar trackBarZoom;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar trackBarContrast;
+        private System.Windows.Forms.TrackBar phiTrackBar;
+        private System.Windows.Forms.TrackBar thetaTrackBar;
+        private System.Windows.Forms.Label phiLabel;
+        private System.Windows.Forms.Label thetaLabel;
 
     }
 }
