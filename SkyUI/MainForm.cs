@@ -88,5 +88,10 @@ namespace Skyfall
         {
             rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float) Math.PI * 2.0f;
         }
+
+        private void turbidityTrackBar_Scroll(object sender, EventArgs e)
+        {
+            rendererControl.SkyDome.Turbidity = (float) turbidityTrackBar.Value;
+        }
     }
 }
