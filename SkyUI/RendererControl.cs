@@ -41,6 +41,8 @@ namespace WinFormsGraphicsDevice
         VertexPositionColor [] bboxVertices;
         Sky.SkyDome skyDome;
         public SkyDome SkyDome { get { return skyDome; } }
+        Sky.CloudRenderer cloudRenderer;
+        Sky.CloudLayer cloudLayer;
 
 
         // flags
@@ -105,6 +107,8 @@ namespace WinFormsGraphicsDevice
             }
 
             skyDome = new SkyDome(GraphicsDevice, Services);
+            cloudRenderer = new CloudRenderer(GraphicsDevice, Services);
+            cloudLayer = new CloudLayer();
         }
 
 
@@ -141,7 +145,10 @@ namespace WinFormsGraphicsDevice
                 GraphicsDevice.DrawUserPrimitives(PrimitiveType.LineList, bboxVertices, 0, 12);
             }
 
-            
+            foreach (var cloud in cloudLayer.Clouds)
+            {
+                cloudRenderer.Render(cloud, effect.View, effect.Projection);
+            }
         }
 
     }

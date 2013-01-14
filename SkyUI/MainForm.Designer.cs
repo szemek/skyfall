@@ -73,8 +73,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(883, 511);
-            this.splitContainer1.SplitterDistance = 634;
+            this.splitContainer1.Size = new System.Drawing.Size(989, 565);
+            this.splitContainer1.SplitterDistance = 710;
             this.splitContainer1.TabIndex = 2;
             // 
             // tabControl1
@@ -248,7 +248,7 @@
             this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rendererControl.Location = new System.Drawing.Point(0, 0);
             this.rendererControl.Name = "rendererControl";
-            this.rendererControl.Size = new System.Drawing.Size(634, 511);
+            this.rendererControl.Size = new System.Drawing.Size(710, 565);
             this.rendererControl.TabIndex = 0;
             this.rendererControl.Text = "rendererControl";
             // 
@@ -256,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 511);
+            this.ClientSize = new System.Drawing.Size(989, 565);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "Skyfall";
