@@ -11,7 +11,7 @@ float coeffy[5];
 float zenithY;
 float zenithx;
 float zenithy;
-
+float exposure;
 
 
 // STRUKTURY
@@ -52,13 +52,16 @@ VSOUTPUT vsmain(float4 pos : POSITION,
 	return o;
 }
 
+
 float4 psmain(float2 angles : TEXCOORD0) : COLOR
 {
 	float Y = zenithY * perezFunction(angles.y, angleBetween(angles.y, angles.x, thetaS, phiS), coeffY);
 	float x = zenithx * perezFunction(angles.y, angleBetween(angles.y, angles.x, thetaS, phiS), coeffx);
 	float y = zenithy * perezFunction(angles.y, angleBetween(angles.y, angles.x, thetaS, phiS), coeffy);
 
-	Y *= 0.046;
+	
+	//Y *= 0.046;
+Y = 1 - exp(-exposure * Y);
 
 	float3 color = float3(x/y * Y, Y, (1-x-y)/y * Y);
 

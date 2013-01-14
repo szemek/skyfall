@@ -52,6 +52,7 @@ namespace Sky
         public float Turbidity  = 3.0f;
         public float ThetaSun = 1.1f;
         public float PhiSun = 3.9f;
+        public float Exposure = 0.1f;
 
 
         public SkyDome(GraphicsDevice dev, IServiceProvider services)
@@ -180,6 +181,7 @@ namespace Sky
             effect.Parameters["thetaS"].SetValue(ThetaSun);
 	        effect.Parameters["phiS"].SetValue(PhiSun);
 	        effect.Parameters["turbidity"].SetValue(Turbidity);
+            effect.Parameters["exposure"].SetValue(Exposure);
 
             Matrix xyztorgb = new Matrix(); // adobe rgb 1998
             xyztorgb.M11 = 3.240479f;  xyztorgb.M21 = -1.53715f;  xyztorgb.M31 = -0.49853f;
@@ -195,7 +197,7 @@ namespace Sky
             device.DepthStencilState = DepthStencilState.DepthRead;
 
             setParameters();
-            Matrix world = Matrix.CreateTranslation(0, -0.3f, 0);
+            Matrix world = Matrix.CreateTranslation(0, -0.5f, 0);
             effect.Parameters["viewProj"].SetValue(world * view * proj);
 
             effect.CurrentTechnique.Passes[0].Apply();
