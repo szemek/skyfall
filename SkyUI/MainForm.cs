@@ -40,17 +40,16 @@ namespace Skyfall
 
         private void UpdateRenderControl()
         {
-            rendererControl.RenderVesselGraph = checkBox2.Checked;
-            rendererControl.UseDiffuseLight = checkBox3.Checked;
-            rendererControl.UseSpecularLight = checkBox4.Checked;
             rendererControl.RenderBoundingBox = checkBox1.Checked;
-            rendererControl.CameraDistance = trackBarZoom.Value * 0.1f;
-            rendererControl.Contrast = trackBarContrast.Value * 0.01f;
+            rendererControl.FOV = 0.5f + 1.5f * trackBarZoom.Value / (float) trackBarZoom.Maximum;
+            rendererControl.SkyDome.ThetaSun = (thetaTrackBar.Value / 100.0f) * (float)Math.PI;
+            rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float)Math.PI * 2.0f;
+            rendererControl.SkyDome.Turbidity = 10.0f * turbidityTrackBar.Value / (float)turbidityTrackBar.Maximum;
+            rendererControl.SkyDome.Exposure = 0.01f + 1.99f * exposureTrackBar.Value / (float)exposureTrackBar.Maximum;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox3.Enabled = checkBox4.Enabled = checkBox2.Checked;
             UpdateRenderControl();
         }
 
@@ -81,17 +80,22 @@ namespace Skyfall
 
         private void thetaTrackBar_Scroll(object sender, EventArgs e)
         {
-            rendererControl.SkyDome.ThetaSun = (thetaTrackBar.Value / 100.0f) * (float) Math.PI;
+            UpdateRenderControl();
         }
 
         private void phiTrackBar_Scroll(object sender, EventArgs e)
         {
-            rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float) Math.PI * 2.0f;
+            UpdateRenderControl();
         }
 
         private void turbidityTrackBar_Scroll(object sender, EventArgs e)
         {
-            rendererControl.SkyDome.Turbidity = (float) turbidityTrackBar.Value;
+            UpdateRenderControl();
+        }
+
+        private void exposureTrackBar_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
         }
     }
 }

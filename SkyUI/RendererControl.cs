@@ -45,13 +45,9 @@ namespace WinFormsGraphicsDevice
 
         // flags
         public bool RenderBoundingBox = true;
-        public bool RenderVesselGraph = true;
-        public bool UseDiffuseLight = true;
-        public bool UseSpecularLight = true;
 
         // params
-        public float CameraDistance = 2.0f;
-        public float Contrast = 1.0f;
+        public float FOV = 1.0f;
 
         /// <summary>
         /// Initializes the control.
@@ -134,7 +130,7 @@ namespace WinFormsGraphicsDevice
 
             effect.World = Matrix.Identity;
             effect.View = Matrix.CreateRotationY(yawPitch.X) * Matrix.CreateRotationX(yawPitch.Y);
-            effect.Projection = Matrix.CreatePerspectiveFieldOfView(1, aspect, 0.1f, 100.0f);
+            effect.Projection = Matrix.CreatePerspectiveFieldOfView(FOV, aspect, 0.1f, 100.0f);
 
             //GraphicsDevice.RasterizerState = RasterizerState.CullNone;
             skyDome.Render(effect.View, effect.Projection);
