@@ -54,6 +54,14 @@ namespace Sky
         public float PhiSun = 3.9f;
         public float Exposure = 0.1f;
 
+        public Vector3 SunDirection
+        {
+            get
+            {
+                return new Vector3((float)(Math.Cos(PhiSun) * Math.Sin(ThetaSun)),
+                    (float)Math.Cos(ThetaSun), (float)(Math.Sin(PhiSun) * Math.Sin(ThetaSun)));
+            }
+        }
 
         public SkyDome(GraphicsDevice dev, IServiceProvider services)
         {
