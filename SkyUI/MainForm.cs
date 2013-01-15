@@ -19,8 +19,21 @@ namespace Skyfall
         [DllImport("Kernel32.dll")]
         static extern Boolean AllocConsole();
 
+        public float[] phis = new float[100];
+        public float[] thetas = new float[100];
+
+        public void InitializeAngles()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                phis[i] = (float) Math.PI + (i / 100.0f) * (float) Math.PI;
+                thetas[i] = (float) (90.0f - 55.0f * Math.Sin((i / 100.0f) * (float) Math.PI)) * (float) Math.PI / 180.0f;
+            }
+        }
+
         public MainForm()
         {
+            InitializeAngles();
             InitializeComponent();
         }
 
@@ -96,6 +109,12 @@ namespace Skyfall
         private void exposureTrackBar_Scroll(object sender, EventArgs e)
         {
             UpdateRenderControl();
+        }
+
+        private void moveTrackBar_Scroll(object sender, EventArgs e)
+        {
+            rendererControl.SkyDome.ThetaSun = thetas[moveTrackBar.Value];
+            rendererControl.SkyDome.PhiSun = phis[moveTrackBar.Value];
         }
     }
 }

@@ -29,35 +29,38 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.renderParams = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.trackBarZoom = new System.Windows.Forms.TrackBar();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.skyParams = new System.Windows.Forms.TabPage();
+            this.exposureTrackBar = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
             this.sunGroupBox = new System.Windows.Forms.GroupBox();
             this.phiTrackBar = new System.Windows.Forms.TrackBar();
             this.phiLabel = new System.Windows.Forms.Label();
             this.thetaTrackBar = new System.Windows.Forms.TrackBar();
             this.thetaLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.trackBarZoom = new System.Windows.Forms.TrackBar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.skyParams = new System.Windows.Forms.TabPage();
             this.turbidityTrackBar = new System.Windows.Forms.TrackBar();
             this.turbidityLabel = new System.Windows.Forms.Label();
-            this.exposureTrackBar = new System.Windows.Forms.TrackBar();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
+            this.moveLabel = new System.Windows.Forms.Label();
+            this.moveTrackBar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.renderParams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
+            this.skyParams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTrackBar)).BeginInit();
             this.sunGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.phiTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thetaTrackBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
-            this.skyParams.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.turbidityTrackBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exposureTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -76,6 +79,15 @@
             this.splitContainer1.Size = new System.Drawing.Size(989, 565);
             this.splitContainer1.SplitterDistance = 710;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // rendererControl
+            // 
+            this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rendererControl.Location = new System.Drawing.Point(0, 0);
+            this.rendererControl.Name = "rendererControl";
+            this.rendererControl.Size = new System.Drawing.Size(710, 565);
+            this.rendererControl.TabIndex = 0;
+            this.rendererControl.Text = "rendererControl";
             // 
             // tabControl1
             // 
@@ -101,59 +113,6 @@
             this.renderParams.TabIndex = 0;
             this.renderParams.Text = "Renderer Parameters";
             this.renderParams.UseVisualStyleBackColor = true;
-            // 
-            // sunGroupBox
-            // 
-            this.sunGroupBox.Controls.Add(this.phiTrackBar);
-            this.sunGroupBox.Controls.Add(this.phiLabel);
-            this.sunGroupBox.Controls.Add(this.thetaTrackBar);
-            this.sunGroupBox.Controls.Add(this.thetaLabel);
-            this.sunGroupBox.Location = new System.Drawing.Point(26, 50);
-            this.sunGroupBox.Name = "sunGroupBox";
-            this.sunGroupBox.Size = new System.Drawing.Size(200, 115);
-            this.sunGroupBox.TabIndex = 12;
-            this.sunGroupBox.TabStop = false;
-            this.sunGroupBox.Text = "Sun";
-            // 
-            // phiTrackBar
-            // 
-            this.phiTrackBar.Location = new System.Drawing.Point(43, 60);
-            this.phiTrackBar.Maximum = 100;
-            this.phiTrackBar.Name = "phiTrackBar";
-            this.phiTrackBar.Size = new System.Drawing.Size(148, 45);
-            this.phiTrackBar.TabIndex = 13;
-            this.phiTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.phiTrackBar.Value = 62;
-            this.phiTrackBar.Scroll += new System.EventHandler(this.phiTrackBar_Scroll);
-            // 
-            // phiLabel
-            // 
-            this.phiLabel.AutoSize = true;
-            this.phiLabel.Location = new System.Drawing.Point(10, 60);
-            this.phiLabel.Name = "phiLabel";
-            this.phiLabel.Size = new System.Drawing.Size(22, 13);
-            this.phiLabel.TabIndex = 12;
-            this.phiLabel.Text = "Phi";
-            // 
-            // thetaTrackBar
-            // 
-            this.thetaTrackBar.Location = new System.Drawing.Point(43, 28);
-            this.thetaTrackBar.Maximum = 100;
-            this.thetaTrackBar.Name = "thetaTrackBar";
-            this.thetaTrackBar.Size = new System.Drawing.Size(148, 45);
-            this.thetaTrackBar.TabIndex = 11;
-            this.thetaTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.thetaTrackBar.Value = 30;
-            this.thetaTrackBar.Scroll += new System.EventHandler(this.thetaTrackBar_Scroll);
-            // 
-            // thetaLabel
-            // 
-            this.thetaLabel.AutoSize = true;
-            this.thetaLabel.Location = new System.Drawing.Point(6, 28);
-            this.thetaLabel.Name = "thetaLabel";
-            this.thetaLabel.Size = new System.Drawing.Size(35, 13);
-            this.thetaLabel.TabIndex = 9;
-            this.thetaLabel.Text = "Theta";
             // 
             // label1
             // 
@@ -203,26 +162,6 @@
             this.skyParams.Text = "Sky Dome";
             this.skyParams.UseVisualStyleBackColor = true;
             // 
-            // turbidityTrackBar
-            // 
-            this.turbidityTrackBar.Location = new System.Drawing.Point(73, 208);
-            this.turbidityTrackBar.Maximum = 800;
-            this.turbidityTrackBar.Name = "turbidityTrackBar";
-            this.turbidityTrackBar.Size = new System.Drawing.Size(144, 45);
-            this.turbidityTrackBar.TabIndex = 15;
-            this.turbidityTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.turbidityTrackBar.Value = 290;
-            this.turbidityTrackBar.Scroll += new System.EventHandler(this.turbidityTrackBar_Scroll);
-            // 
-            // turbidityLabel
-            // 
-            this.turbidityLabel.AutoSize = true;
-            this.turbidityLabel.Location = new System.Drawing.Point(20, 208);
-            this.turbidityLabel.Name = "turbidityLabel";
-            this.turbidityLabel.Size = new System.Drawing.Size(47, 13);
-            this.turbidityLabel.TabIndex = 14;
-            this.turbidityLabel.Text = "Turbidity";
-            // 
             // exposureTrackBar
             // 
             this.exposureTrackBar.Location = new System.Drawing.Point(73, 240);
@@ -243,14 +182,99 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "Exposure";
             // 
-            // rendererControl
+            // sunGroupBox
             // 
-            this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rendererControl.Location = new System.Drawing.Point(0, 0);
-            this.rendererControl.Name = "rendererControl";
-            this.rendererControl.Size = new System.Drawing.Size(710, 565);
-            this.rendererControl.TabIndex = 0;
-            this.rendererControl.Text = "rendererControl";
+            this.sunGroupBox.Controls.Add(this.moveTrackBar);
+            this.sunGroupBox.Controls.Add(this.moveLabel);
+            this.sunGroupBox.Controls.Add(this.phiTrackBar);
+            this.sunGroupBox.Controls.Add(this.phiLabel);
+            this.sunGroupBox.Controls.Add(this.thetaTrackBar);
+            this.sunGroupBox.Controls.Add(this.thetaLabel);
+            this.sunGroupBox.Location = new System.Drawing.Point(26, 50);
+            this.sunGroupBox.Name = "sunGroupBox";
+            this.sunGroupBox.Size = new System.Drawing.Size(200, 136);
+            this.sunGroupBox.TabIndex = 12;
+            this.sunGroupBox.TabStop = false;
+            this.sunGroupBox.Text = "Sun";
+            // 
+            // phiTrackBar
+            // 
+            this.phiTrackBar.Location = new System.Drawing.Point(43, 60);
+            this.phiTrackBar.Maximum = 100;
+            this.phiTrackBar.Name = "phiTrackBar";
+            this.phiTrackBar.Size = new System.Drawing.Size(148, 45);
+            this.phiTrackBar.TabIndex = 13;
+            this.phiTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.phiTrackBar.Value = 62;
+            this.phiTrackBar.Scroll += new System.EventHandler(this.phiTrackBar_Scroll);
+            // 
+            // phiLabel
+            // 
+            this.phiLabel.AutoSize = true;
+            this.phiLabel.Location = new System.Drawing.Point(10, 60);
+            this.phiLabel.Name = "phiLabel";
+            this.phiLabel.Size = new System.Drawing.Size(22, 13);
+            this.phiLabel.TabIndex = 12;
+            this.phiLabel.Text = "Phi";
+            // 
+            // thetaTrackBar
+            // 
+            this.thetaTrackBar.Location = new System.Drawing.Point(43, 28);
+            this.thetaTrackBar.Maximum = 100;
+            this.thetaTrackBar.Name = "thetaTrackBar";
+            this.thetaTrackBar.Size = new System.Drawing.Size(148, 45);
+            this.thetaTrackBar.TabIndex = 11;
+            this.thetaTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.thetaTrackBar.Value = 30;
+            this.thetaTrackBar.Scroll += new System.EventHandler(this.thetaTrackBar_Scroll);
+            // 
+            // thetaLabel
+            // 
+            this.thetaLabel.AutoSize = true;
+            this.thetaLabel.Location = new System.Drawing.Point(6, 28);
+            this.thetaLabel.Name = "thetaLabel";
+            this.thetaLabel.Size = new System.Drawing.Size(35, 13);
+            this.thetaLabel.TabIndex = 9;
+            this.thetaLabel.Text = "Theta";
+            // 
+            // turbidityTrackBar
+            // 
+            this.turbidityTrackBar.Location = new System.Drawing.Point(73, 208);
+            this.turbidityTrackBar.Maximum = 800;
+            this.turbidityTrackBar.Name = "turbidityTrackBar";
+            this.turbidityTrackBar.Size = new System.Drawing.Size(144, 45);
+            this.turbidityTrackBar.TabIndex = 15;
+            this.turbidityTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.turbidityTrackBar.Value = 290;
+            this.turbidityTrackBar.Scroll += new System.EventHandler(this.turbidityTrackBar_Scroll);
+            // 
+            // turbidityLabel
+            // 
+            this.turbidityLabel.AutoSize = true;
+            this.turbidityLabel.Location = new System.Drawing.Point(20, 208);
+            this.turbidityLabel.Name = "turbidityLabel";
+            this.turbidityLabel.Size = new System.Drawing.Size(47, 13);
+            this.turbidityLabel.TabIndex = 14;
+            this.turbidityLabel.Text = "Turbidity";
+            // 
+            // moveLabel
+            // 
+            this.moveLabel.AutoSize = true;
+            this.moveLabel.Location = new System.Drawing.Point(10, 108);
+            this.moveLabel.Name = "moveLabel";
+            this.moveLabel.Size = new System.Drawing.Size(33, 13);
+            this.moveLabel.TabIndex = 14;
+            this.moveLabel.Text = "move";
+            // 
+            // moveTrackBar
+            // 
+            this.moveTrackBar.Location = new System.Drawing.Point(87, 91);
+            this.moveTrackBar.Maximum = 99;
+            this.moveTrackBar.Name = "moveTrackBar";
+            this.moveTrackBar.Size = new System.Drawing.Size(104, 45);
+            this.moveTrackBar.TabIndex = 15;
+            this.moveTrackBar.TickFrequency = 10;
+            this.moveTrackBar.Scroll += new System.EventHandler(this.moveTrackBar_Scroll);
             // 
             // MainForm
             // 
@@ -268,15 +292,16 @@
             this.tabControl1.ResumeLayout(false);
             this.renderParams.ResumeLayout(false);
             this.renderParams.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
+            this.skyParams.ResumeLayout(false);
+            this.skyParams.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exposureTrackBar)).EndInit();
             this.sunGroupBox.ResumeLayout(false);
             this.sunGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.phiTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thetaTrackBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
-            this.skyParams.ResumeLayout(false);
-            this.skyParams.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.turbidityTrackBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exposureTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moveTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -300,6 +325,8 @@
         private System.Windows.Forms.Label turbidityLabel;
         private System.Windows.Forms.TrackBar exposureTrackBar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar moveTrackBar;
+        private System.Windows.Forms.Label moveLabel;
 
     }
 }
