@@ -3,6 +3,12 @@ float4x4 worldView;
 float3 sunDir;
 float3 color = float3(0.8,0.8,0.8);
 
+float scatteredMin;
+float scatteredMax;
+float dirMin;
+float dirMax;
+float constant;
+
 struct VSOUTPUT
 {
 	float4 pos : POSITION;
@@ -30,10 +36,10 @@ float4 psmain(float3 normal : TEXCOORD0, float3 viewDir : TEXCOORD2) : COLOR
 	float3 N = normalize(normal);
 	float3 V = normalize(viewDir);
 
-	float scattered = dot(N, V) * 0.3 + 0.7;
-	float ndotl = dot(N, sunDir) * 0.2 + 0.8;
+	float scattered = lerp(scatteredMin, scatteredMax, dot(N, V) * 0.5 + 0.5);
+	float ndotl = lerp(dirMin, dirMax, dot(N, sunDir) * 0.5 + 0.5);
 	
-	return float4((ndotl+0.5*scattered+0.1)*color, 1);
+	return float4((ndotl + scattered + constant) * color, 1);
 }
 
  

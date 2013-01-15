@@ -22,6 +22,16 @@ namespace Sky
         VertexBuffer fullscreenQuad;
         int targetResolution;
 
+        public float ScatteredMin;
+        public float ScatteredMax;
+        public float DirectionalMin;
+        public float DirectionalMax;
+        public float Constant;
+        public float Hardness;
+        public bool BypassDistortion;
+        public float DistortionFreq;
+        public float DistortionAmp;
+
 
         public CloudRenderer(GraphicsDevice dev, IServiceProvider services)
         {
@@ -55,16 +65,23 @@ namespace Sky
         {
             device.SetRenderTarget(lightingTarget);
             device.Clear(Color.Transparent);
+
+            effectLight.Parameters["sunDir"].SetValue(sunDir);
+            effectLight.Parameters["scatteredMin"].SetValue(ScatteredMin);
+            effectLight.Parameters["scatteredMax"].SetValue(ScatteredMax);
+            effectLight.Parameters["dirMin"].SetValue(DirectionalMin);
+            effectLight.Parameters["dirMax"].SetValue(DirectionalMax);
+            effectLight.Parameters["constant"].SetValue(Constant);
+
             foreach (var sphere in cloud.Spheres)
             {
                 Matrix world = Matrix.CreateScale(sphere.radius) * Matrix.CreateTranslation(sphere.position);
                 effectLight.Parameters["worldViewProj"].SetValue(world * view * proj);
                 effectLight.Parameters["worldView"].SetValue(world);
-                effectLight.Parameters["sunDir"].SetValue(sunDir);
-
                 mesh.Meshes[0].MeshParts[0].Effect = effectLight;
                 mesh.Meshes[0].Draw();
             }
+            
             device.BlendState = BlendState.AlphaBlend;
 
             device.SetRenderTarget(blurVTarget);
@@ -75,21 +92,28 @@ namespace Sky
             device.SetVertexBuffer(fullscreenQuad);
             device.DrawPrimitives(PrimitiveType.TriangleStrip, 0, 2);
 
-            device.SetRenderTarget(blurHTarget);
-            device.Clear(Color.Transparent);
+            device.SetRenderTarget(BypassDistortion ? null : blurHTarget);
+            if (!BypassDistortion)
+                device.Clear(Color.Transparent);
             effectPostprocess.Parameters["cloudLight"].SetValue(blurVTarget);
             effectPostprocess.Parameters["offset"].SetValue(1.0f / (float)targetResolution);
             effectPostprocess.CurrentTechnique.Passes[1].Apply();
             device.SetVertexBuffer(fullscreenQuad);
             device.DrawPrimitives(PrimitiveType.TriangleStrip, 0, 2);
 
-            device.SetRenderTarget(null);
-            effectPostprocess.Parameters["cloudLight"].SetValue(blurHTarget);
-            effectPostprocess.Parameters["offset"].SetValue(1.0f / (float)targetResolution);
-            effectPostprocess.Parameters["distortion"].SetValue(distortion);
-            effectPostprocess.CurrentTechnique.Passes[2].Apply();
-            device.SetVertexBuffer(fullscreenQuad);
-            device.DrawPrimitives(PrimitiveType.TriangleStrip, 0, 2);
+            if (!BypassDistortion)
+            {
+                device.SetRenderTarget(null);
+                effectPostprocess.Parameters["cloudLight"].SetValue(blurHTarget);
+                effectPostprocess.Parameters["offset"].SetValue(1.0f / (float)targetResolution);
+                effectPostprocess.Parameters["distortion"].SetValue(distortion);
+                effectPostprocess.Parameters["hardness"].SetValue(Hardness);
+                effectPostprocess.Parameters["frequency"].SetValue(DistortionFreq);
+                effectPostprocess.Parameters["amplitude"].SetValue(DistortionAmp);
+                effectPostprocess.CurrentTechnique.Passes[2].Apply();
+                device.SetVertexBuffer(fullscreenQuad);
+                device.DrawPrimitives(PrimitiveType.TriangleStrip, 0, 2);
+            }
 
             device.BlendState = BlendState.Opaque;
         }
