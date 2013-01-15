@@ -1,2 +1,5 @@
 SkyContent\skydome.xnb
 SkyContent\sphere.xnb
+SkyContent\cloudLight.xnb
+SkyContent\cloudPostprocess.xnb
+SkyContent\noise.xnb

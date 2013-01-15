@@ -147,7 +147,7 @@ namespace WinFormsGraphicsDevice
 
             foreach (var cloud in cloudLayer.Clouds)
             {
-                cloudRenderer.Render(cloud, effect.View, effect.Projection);
+                cloudRenderer.Render(cloud, effect.View, effect.Projection, skyDome.SunDirection);
             }
         }
 
