@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,8 +26,8 @@ namespace Skyfall
         {
             for (int i = 0; i < 100; i++)
             {
-                phis[i] = (float) Math.PI + (i / 100.0f) * (float) Math.PI;
-                thetas[i] = (float) (90.0f - 55.0f * Math.Sin((i / 100.0f) * (float) Math.PI)) * (float) Math.PI / 180.0f;
+                phis[i] = (float) Math.PI * 0.25f + (i / 100.0f) * (float) Math.PI;
+                thetas[i] = (float) (90.0f - 80.0f * Math.Sin((i / 100.0f) * (float) Math.PI)) * (float) Math.PI / 180.0f;
             }
         }
 
@@ -53,12 +53,25 @@ namespace Skyfall
 
         private void UpdateRenderControl()
         {
-            rendererControl.RenderBoundingBox = checkBox1.Checked;
+			rendererControl.RenderBoundingBox = checkBox1.Checked;
             rendererControl.FOV = 0.5f + 1.5f * trackBarZoom.Value / (float) trackBarZoom.Maximum;
-            rendererControl.SkyDome.ThetaSun = (thetaTrackBar.Value / 100.0f) * (float)Math.PI;
-            rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float)Math.PI * 2.0f;
+
+            //rendererControl.SkyDome.ThetaSun = (thetaTrackBar.Value / 100.0f) * (float)Math.PI;
+            //rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float)Math.PI * 2.0f;
+			rendererControl.SkyDome.ThetaSun = thetas[moveTrackBar.Value];
+            rendererControl.SkyDome.PhiSun = phis[moveTrackBar.Value];
             rendererControl.SkyDome.Turbidity = 10.0f * turbidityTrackBar.Value / (float)turbidityTrackBar.Maximum;
-            rendererControl.SkyDome.Exposure = 0.01f + 1.99f * exposureTrackBar.Value / (float)exposureTrackBar.Maximum;
+            rendererControl.SkyDome.Exposure = 0.01f + 0.66f * exposureTrackBar.Value / (float)exposureTrackBar.Maximum;
+
+            rendererControl.CloudRenderer.DirectionalMin = directionalMinTB.Value / (float)directionalMinTB.Maximum;
+            rendererControl.CloudRenderer.DirectionalMax = directionalMaxTB.Value / (float)directionalMaxTB.Maximum;
+            rendererControl.CloudRenderer.ScatteredMin = scatteredMinTB.Value / (float)scatteredMinTB.Maximum;
+            rendererControl.CloudRenderer.ScatteredMax = scatteredMaxTB.Value / (float)scatteredMaxTB.Maximum;
+            rendererControl.CloudRenderer.Constant = constantTB.Value / (float)constantTB.Maximum;
+            rendererControl.CloudRenderer.Hardness = 0.2f + 15.0f * hardnessTB.Value / (float)hardnessTB.Maximum;
+            rendererControl.CloudRenderer.BypassDistortion = distortionBypassCheckbox.Checked;
+            rendererControl.CloudRenderer.DistortionFreq = 0.2f + 5.0f * frequencyTB.Value / (float)frequencyTB.Maximum;
+            rendererControl.CloudRenderer.DistortionAmp = 0.01f + 0.2f * amplitudeTB.Value / (float)amplitudeTB.Maximum;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -113,8 +126,52 @@ namespace Skyfall
 
         private void moveTrackBar_Scroll(object sender, EventArgs e)
         {
-            rendererControl.SkyDome.ThetaSun = thetas[moveTrackBar.Value];
-            rendererControl.SkyDome.PhiSun = phis[moveTrackBar.Value];
+            UpdateRenderControl();
+        }
+		
+		private void scatteredMinTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void scatteredMaxTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void directionalMinTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void directionalMaxTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void constantTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void hardnessTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void distortionBypassCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void frequencyTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void amplitudeTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
         }
     }
 }
