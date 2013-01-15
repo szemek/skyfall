@@ -144,18 +144,22 @@ namespace Sky
             float[] coeffx = new float[5];
             float[] coeffy = new float[5];
 
+            // http://www.cs.utah.edu/~shirley/papers/sunsky/sunsky.pdf
+            // Distribution coefficients for the luminance distribution function
 	        coeffY[0] =  0.1787f * Turbidity - 1.4630f;
 	        coeffY[1] = -0.3554f * Turbidity + 0.4275f;
 	        coeffY[2] = -0.0227f * Turbidity + 5.3251f;
 	        coeffY[3] =  0.1206f * Turbidity - 2.5771f;
 	        coeffY[4] = -0.0670f * Turbidity + 0.3703f;
 
+            // Distribution coefficients for x distribution function
 	        coeffx[0] = -0.0193f * Turbidity - 0.2592f;
 	        coeffx[1] = -0.0665f * Turbidity + 0.0008f;
 	        coeffx[2] = -0.0004f * Turbidity + 0.2125f;
 	        coeffx[3] = -0.0641f * Turbidity - 0.8989f;
 	        coeffx[4] = -0.0033f * Turbidity + 0.0452f;
 
+            // Distribution coefficients for x distribution function
 	        coeffy[0] = -0.0167f * Turbidity - 0.2608f;
 	        coeffy[1] = -0.0950f * Turbidity + 0.0092f;
 	        coeffy[2] = -0.0079f * Turbidity + 0.2102f;
@@ -168,6 +172,7 @@ namespace Sky
 
 
 	        float chi = (4/9.0f - Turbidity/120.0f) * ((float)Math.PI - 2 * ThetaSun);
+            // Absolute value of zenith luminance
 	        float zenithY = (4.0453f * Turbidity - 4.9710f) * (float)Math.Tan(chi) - 0.2155f * Turbidity + 2.4192f;
 
             float thetaS2 = ThetaSun * ThetaSun;
