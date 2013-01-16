@@ -28,7 +28,7 @@ namespace Sky
             public SkyVertex(float phi, float theta)
             {
                 this.phi = phi;
-                this.theta = theta;
+                this.theta = theta - 0.001f;
                 this.position = new Vector3((float)(Math.Cos(phi) * Math.Sin(theta)),
                     (float)Math.Cos(theta), (float)(Math.Sin(phi) * Math.Sin(theta)));
             }
@@ -48,11 +48,17 @@ namespace Sky
         VertexBuffer vBuffer;
         int phiSteps, thetaSteps;
         int[] triStrips;
+        Vector3 sunlightColor;
 
         public float Turbidity  = 3.0f;
         public float ThetaSun = 1.1f;
         public float PhiSun = 3.9f;
         public float Exposure = 0.1f;
+        
+        public Vector3 SunlightColor
+        {
+            get { return sunlightColor; }
+        }
 
         public Vector3 SunDirection
         {
@@ -63,6 +69,7 @@ namespace Sky
             }
         }
 
+        
         public SkyDome(GraphicsDevice dev, IServiceProvider services)
         {
             device = dev;
@@ -201,6 +208,15 @@ namespace Sky
             xyztorgb.M12 = -0.969256f; xyztorgb.M22 = 1.875991f;  xyztorgb.M32 = 0.041556f;
             xyztorgb.M13 = 0.055648f;  xyztorgb.M23 = -0.204043f; xyztorgb.M33 = 1.057311f;
             effect.Parameters["XYZtoRGB"].SetValue(xyztorgb);
+
+            // calculate sunlight color
+            float Y = zenithY * perezFunAtSun(coeffY);
+            float x = zenithx * perezFunAtSun(coeffx);
+            float y = zenithy * perezFunAtSun(coeffy);
+
+            Y = 0.04f*Y;// -(float)Math.Exp(-Exposure * Y);
+            sunlightColor = new Vector3(x / y * Y, Y, (1 - x - y) / y * Y);
+            sunlightColor = Vector3.Transform(sunlightColor, xyztorgb);
         }
 
 
@@ -227,6 +243,18 @@ namespace Sky
             }
 
             device.DepthStencilState = DepthStencilState.Default;
+        }
+
+
+        float perezFunAtSun(float [] coeff)
+        {
+	        float num = ( 1 + coeff[0] * (float)Math.Exp(coeff[1] / Math.Cos(ThetaSun)) )
+		        * ( 1 + coeff[2] + coeff[4] );
+
+            float den = (1 + coeff[0] * (float)Math.Exp(coeff[1]))
+                * (1 + coeff[2] * (float)Math.Exp(coeff[3] * ThetaSun) + coeff[4] * (float)(Math.Cos(ThetaSun) * Math.Cos(ThetaSun)));
+
+	        return num / den;
         }
 
     }
