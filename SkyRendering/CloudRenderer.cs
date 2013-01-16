@@ -26,6 +26,7 @@ namespace Sky
         public float ScatteredMax;
         public float DirectionalMin;
         public float DirectionalMax;
+        public float DirectionalExp;
         public float Constant;
         public float Hardness;
         public bool BypassDistortion;
@@ -61,17 +62,21 @@ namespace Sky
         }
 
 
-        public void Render(Cloud cloud, Matrix view, Matrix proj, Vector3 sunDir)
+        public void Render(Cloud cloud, Matrix view, Matrix proj, Vector3 sunDir, Vector3 sunlightColor)
         {
             device.SetRenderTarget(lightingTarget);
             device.Clear(Color.Transparent);
 
             effectLight.Parameters["sunDir"].SetValue(sunDir);
+            effectLight.Parameters["color"].SetValue(sunlightColor);
             effectLight.Parameters["scatteredMin"].SetValue(ScatteredMin);
             effectLight.Parameters["scatteredMax"].SetValue(ScatteredMax);
             effectLight.Parameters["dirMin"].SetValue(DirectionalMin);
             effectLight.Parameters["dirMax"].SetValue(DirectionalMax);
+            effectLight.Parameters["dirExp"].SetValue(DirectionalExp);
             effectLight.Parameters["constant"].SetValue(Constant);
+
+            //device.DepthStencilState = DepthStencilState.Default;
 
             foreach (var sphere in cloud.Spheres)
             {

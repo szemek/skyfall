@@ -65,6 +65,7 @@ namespace Skyfall
 
             rendererControl.CloudRenderer.DirectionalMin = directionalMinTB.Value / (float)directionalMinTB.Maximum;
             rendererControl.CloudRenderer.DirectionalMax = directionalMaxTB.Value / (float)directionalMaxTB.Maximum;
+            rendererControl.CloudRenderer.DirectionalExp = 0.2f + 1.3f * directionalExpTB.Value / (float)directionalExpTB.Maximum;
             rendererControl.CloudRenderer.ScatteredMin = scatteredMinTB.Value / (float)scatteredMinTB.Maximum;
             rendererControl.CloudRenderer.ScatteredMax = scatteredMaxTB.Value / (float)scatteredMaxTB.Maximum;
             rendererControl.CloudRenderer.Constant = constantTB.Value / (float)constantTB.Maximum;
@@ -170,6 +171,11 @@ namespace Skyfall
         }
 
         private void amplitudeTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void directionalExpTB_Scroll(object sender, EventArgs e)
         {
             UpdateRenderControl();
         }

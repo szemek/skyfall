@@ -30,7 +30,6 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.renderParams = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,6 +69,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.directionalExpTB = new System.Windows.Forms.TrackBar();
+            this.label13 = new System.Windows.Forms.Label();
+            this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,11 +97,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.directionalMinTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMaxTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMinTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.directionalExpTB)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -110,18 +114,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(989, 565);
-            this.splitContainer1.SplitterDistance = 710;
+            this.splitContainer1.Size = new System.Drawing.Size(897, 565);
+            this.splitContainer1.SplitterDistance = 594;
             this.splitContainer1.TabIndex = 2;
-            // 
-            // rendererControl
-            // 
-            this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rendererControl.Location = new System.Drawing.Point(0, 0);
-            this.rendererControl.Name = "rendererControl";
-            this.rendererControl.Size = new System.Drawing.Size(710, 565);
-            this.rendererControl.TabIndex = 0;
-            this.rendererControl.Text = "rendererControl";
             // 
             // tabControl1
             // 
@@ -134,7 +129,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(272, 511);
+            this.tabControl1.Size = new System.Drawing.Size(293, 511);
             this.tabControl1.TabIndex = 1;
             // 
             // renderParams
@@ -142,10 +137,10 @@
             this.renderParams.Controls.Add(this.label1);
             this.renderParams.Controls.Add(this.trackBarZoom);
             this.renderParams.Controls.Add(this.checkBox1);
-            this.renderParams.Location = new System.Drawing.Point(4, 49);
+            this.renderParams.Location = new System.Drawing.Point(4, 25);
             this.renderParams.Name = "renderParams";
             this.renderParams.Padding = new System.Windows.Forms.Padding(3);
-            this.renderParams.Size = new System.Drawing.Size(264, 458);
+            this.renderParams.Size = new System.Drawing.Size(285, 482);
             this.renderParams.TabIndex = 0;
             this.renderParams.Text = "Renderer Parameters";
             this.renderParams.UseVisualStyleBackColor = true;
@@ -190,10 +185,10 @@
             this.skyParams.Controls.Add(this.sunGroupBox);
             this.skyParams.Controls.Add(this.turbidityTrackBar);
             this.skyParams.Controls.Add(this.turbidityLabel);
-            this.skyParams.Location = new System.Drawing.Point(4, 49);
+            this.skyParams.Location = new System.Drawing.Point(4, 25);
             this.skyParams.Name = "skyParams";
             this.skyParams.Padding = new System.Windows.Forms.Padding(3);
-            this.skyParams.Size = new System.Drawing.Size(264, 458);
+            this.skyParams.Size = new System.Drawing.Size(285, 482);
             this.skyParams.TabIndex = 1;
             this.skyParams.Text = "Sky Dome";
             this.skyParams.UseVisualStyleBackColor = true;
@@ -237,11 +232,13 @@
             // 
             this.moveTrackBar.Location = new System.Drawing.Point(49, 108);
             this.moveTrackBar.Maximum = 99;
+            this.moveTrackBar.Minimum = 1;
             this.moveTrackBar.Name = "moveTrackBar";
             this.moveTrackBar.Size = new System.Drawing.Size(104, 45);
             this.moveTrackBar.TabIndex = 15;
             this.moveTrackBar.TickFrequency = 10;
             this.moveTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.moveTrackBar.Value = 1;
             this.moveTrackBar.Scroll += new System.EventHandler(this.moveTrackBar_Scroll);
             // 
             // moveLabel
@@ -319,16 +316,16 @@
             this.cloudsShadingParams.Controls.Add(this.label12);
             this.cloudsShadingParams.Controls.Add(this.groupBox2);
             this.cloudsShadingParams.Controls.Add(this.groupBox1);
-            this.cloudsShadingParams.Location = new System.Drawing.Point(4, 49);
+            this.cloudsShadingParams.Location = new System.Drawing.Point(4, 25);
             this.cloudsShadingParams.Name = "cloudsShadingParams";
-            this.cloudsShadingParams.Size = new System.Drawing.Size(264, 458);
+            this.cloudsShadingParams.Size = new System.Drawing.Size(285, 482);
             this.cloudsShadingParams.TabIndex = 2;
             this.cloudsShadingParams.Text = "Clouds Shading";
             this.cloudsShadingParams.UseVisualStyleBackColor = true;
             // 
             // hardnessTB
             // 
-            this.hardnessTB.Location = new System.Drawing.Point(79, 365);
+            this.hardnessTB.Location = new System.Drawing.Point(79, 399);
             this.hardnessTB.Maximum = 500;
             this.hardnessTB.Name = "hardnessTB";
             this.hardnessTB.Size = new System.Drawing.Size(140, 45);
@@ -340,7 +337,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(24, 365);
+            this.label12.Location = new System.Drawing.Point(24, 399);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(52, 13);
             this.label12.TabIndex = 2;
@@ -353,9 +350,9 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.distortionBypassCheckbox);
-            this.groupBox2.Location = new System.Drawing.Point(14, 241);
+            this.groupBox2.Location = new System.Drawing.Point(14, 275);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(230, 107);
+            this.groupBox2.Size = new System.Drawing.Size(246, 107);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Distortion";
@@ -413,6 +410,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.directionalExpTB);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.constantTB);
             this.groupBox1.Controls.Add(this.directionalMaxTB);
             this.groupBox1.Controls.Add(this.directionalMinTB);
@@ -427,20 +426,20 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(14, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 209);
+            this.groupBox1.Size = new System.Drawing.Size(246, 241);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lighting";
             // 
             // constantTB
             // 
-            this.constantTB.Location = new System.Drawing.Point(65, 177);
+            this.constantTB.Location = new System.Drawing.Point(65, 206);
             this.constantTB.Maximum = 100;
             this.constantTB.Name = "constantTB";
             this.constantTB.Size = new System.Drawing.Size(140, 45);
             this.constantTB.TabIndex = 11;
             this.constantTB.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.constantTB.Value = 35;
+            this.constantTB.Value = 7;
             this.constantTB.Scroll += new System.EventHandler(this.constantTB_Scroll);
             // 
             // directionalMaxTB
@@ -451,7 +450,7 @@
             this.directionalMaxTB.Size = new System.Drawing.Size(140, 45);
             this.directionalMaxTB.TabIndex = 10;
             this.directionalMaxTB.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.directionalMaxTB.Value = 90;
+            this.directionalMaxTB.Value = 75;
             this.directionalMaxTB.Scroll += new System.EventHandler(this.directionalMaxTB_Scroll);
             // 
             // directionalMinTB
@@ -462,7 +461,7 @@
             this.directionalMinTB.Size = new System.Drawing.Size(140, 45);
             this.directionalMinTB.TabIndex = 9;
             this.directionalMinTB.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.directionalMinTB.Value = 65;
+            this.directionalMinTB.Value = 40;
             this.directionalMinTB.Scroll += new System.EventHandler(this.directionalMinTB_Scroll);
             // 
             // scatteredMaxTB
@@ -473,7 +472,7 @@
             this.scatteredMaxTB.Size = new System.Drawing.Size(140, 45);
             this.scatteredMaxTB.TabIndex = 8;
             this.scatteredMaxTB.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.scatteredMaxTB.Value = 30;
+            this.scatteredMaxTB.Value = 55;
             this.scatteredMaxTB.Scroll += new System.EventHandler(this.scatteredMaxTB_Scroll);
             // 
             // scatteredMinTB
@@ -484,15 +483,16 @@
             this.scatteredMinTB.Size = new System.Drawing.Size(140, 45);
             this.scatteredMinTB.TabIndex = 7;
             this.scatteredMinTB.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.scatteredMinTB.Value = 7;
+            this.scatteredMinTB.Value = 15;
             this.scatteredMinTB.Scroll += new System.EventHandler(this.scatteredMinTB_Scroll);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(14, 177);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(14, 206);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 6;
             this.label9.Text = "Constant";
             // 
@@ -517,9 +517,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label6.Location = new System.Drawing.Point(6, 99);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.Size = new System.Drawing.Size(68, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "Directional";
             // 
@@ -544,17 +545,47 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.Location = new System.Drawing.Point(7, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Scattered";
+            // 
+            // directionalExpTB
+            // 
+            this.directionalExpTB.Location = new System.Drawing.Point(67, 160);
+            this.directionalExpTB.Maximum = 100;
+            this.directionalExpTB.Name = "directionalExpTB";
+            this.directionalExpTB.Size = new System.Drawing.Size(140, 45);
+            this.directionalExpTB.TabIndex = 13;
+            this.directionalExpTB.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.directionalExpTB.Value = 30;
+            this.directionalExpTB.Scroll += new System.EventHandler(this.directionalExpTB_Scroll);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 160);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "exponent";
+            // 
+            // rendererControl
+            // 
+            this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rendererControl.Location = new System.Drawing.Point(0, 0);
+            this.rendererControl.Name = "rendererControl";
+            this.rendererControl.Size = new System.Drawing.Size(594, 565);
+            this.rendererControl.TabIndex = 0;
+            this.rendererControl.Text = "rendererControl";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 565);
+            this.ClientSize = new System.Drawing.Size(897, 565);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "Skyfall";
@@ -590,6 +621,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.directionalMinTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMaxTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMinTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.directionalExpTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -637,6 +669,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar directionalExpTB;
+        private System.Windows.Forms.Label label13;
 
     }
 }
