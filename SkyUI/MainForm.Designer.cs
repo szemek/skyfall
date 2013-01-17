@@ -71,6 +71,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.cloudsLabel = new System.Windows.Forms.Label();
+            this.cloudsTrackBar = new System.Windows.Forms.TrackBar();
             this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -98,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.directionalMinTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMaxTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMinTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloudsTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -134,6 +137,8 @@
             // 
             // renderParams
             // 
+            this.renderParams.Controls.Add(this.cloudsTrackBar);
+            this.renderParams.Controls.Add(this.cloudsLabel);
             this.renderParams.Controls.Add(this.FOVLabel);
             this.renderParams.Controls.Add(this.FOVTrackBar);
             this.renderParams.Controls.Add(this.boundingBoxCheckBox);
@@ -570,6 +575,25 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Scattered";
             // 
+            // cloudsLabel
+            // 
+            this.cloudsLabel.AutoSize = true;
+            this.cloudsLabel.Location = new System.Drawing.Point(24, 157);
+            this.cloudsLabel.Name = "cloudsLabel";
+            this.cloudsLabel.Size = new System.Drawing.Size(39, 13);
+            this.cloudsLabel.TabIndex = 6;
+            this.cloudsLabel.Text = "Clouds";
+            // 
+            // cloudsTrackBar
+            // 
+            this.cloudsTrackBar.Location = new System.Drawing.Point(103, 157);
+            this.cloudsTrackBar.Minimum = 1;
+            this.cloudsTrackBar.Name = "cloudsTrackBar";
+            this.cloudsTrackBar.Size = new System.Drawing.Size(104, 45);
+            this.cloudsTrackBar.TabIndex = 7;
+            this.cloudsTrackBar.Value = 1;
+            this.cloudsTrackBar.Scroll += new System.EventHandler(this.cloudsTrackBar_Scroll);
+            // 
             // rendererControl
             // 
             this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -620,6 +644,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.directionalMinTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMaxTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMinTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cloudsTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -669,6 +694,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar directionalExpTB;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TrackBar cloudsTrackBar;
+        private System.Windows.Forms.Label cloudsLabel;
 
     }
 }

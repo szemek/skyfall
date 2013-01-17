@@ -43,7 +43,7 @@ namespace WinFormsGraphicsDevice
         public SkyDome SkyDome { get { return skyDome; } }
         Sky.CloudRenderer cloudRenderer;
         public CloudRenderer CloudRenderer { get { return cloudRenderer; } }
-        Sky.CloudLayer cloudLayer;
+        public Sky.CloudLayer cloudLayer;
 
 
         // flags
