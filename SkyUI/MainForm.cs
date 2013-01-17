@@ -179,5 +179,11 @@ namespace Skyfall
         {
             UpdateRenderControl();
         }
+
+        private void cloudsTrackBar_Scroll(object sender, EventArgs e)
+        {
+            rendererControl.cloudLayer.generateClouds(cloudsTrackBar.Value);
+            UpdateRenderControl();
+        }
     }
 }
