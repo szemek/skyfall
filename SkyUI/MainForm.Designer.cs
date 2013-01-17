@@ -32,9 +32,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.renderParams = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.trackBarZoom = new System.Windows.Forms.TrackBar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.FOVLabel = new System.Windows.Forms.Label();
+            this.FOVTrackBar = new System.Windows.Forms.TrackBar();
+            this.boundingBoxCheckBox = new System.Windows.Forms.CheckBox();
             this.skyParams = new System.Windows.Forms.TabPage();
             this.exposureTrackBar = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +57,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.distortionBypassCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.directionalExpTB = new System.Windows.Forms.TrackBar();
+            this.label13 = new System.Windows.Forms.Label();
             this.constantTB = new System.Windows.Forms.TrackBar();
             this.directionalMaxTB = new System.Windows.Forms.TrackBar();
             this.directionalMinTB = new System.Windows.Forms.TrackBar();
@@ -69,8 +71,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.directionalExpTB = new System.Windows.Forms.TrackBar();
-            this.label13 = new System.Windows.Forms.Label();
             this.rendererControl = new WinFormsGraphicsDevice.RendererControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -78,7 +78,7 @@
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.renderParams.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FOVTrackBar)).BeginInit();
             this.skyParams.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exposureTrackBar)).BeginInit();
             this.sunGroupBox.SuspendLayout();
@@ -92,12 +92,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.amplitudeTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frequencyTB)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.directionalExpTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.constantTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.directionalMaxTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.directionalMinTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMaxTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMinTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.directionalExpTB)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -134,9 +134,9 @@
             // 
             // renderParams
             // 
-            this.renderParams.Controls.Add(this.label1);
-            this.renderParams.Controls.Add(this.trackBarZoom);
-            this.renderParams.Controls.Add(this.checkBox1);
+            this.renderParams.Controls.Add(this.FOVLabel);
+            this.renderParams.Controls.Add(this.FOVTrackBar);
+            this.renderParams.Controls.Add(this.boundingBoxCheckBox);
             this.renderParams.Location = new System.Drawing.Point(4, 25);
             this.renderParams.Name = "renderParams";
             this.renderParams.Padding = new System.Windows.Forms.Padding(3);
@@ -145,38 +145,36 @@
             this.renderParams.Text = "Renderer Parameters";
             this.renderParams.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // FOVLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "FOV";
+            this.FOVLabel.AutoSize = true;
+            this.FOVLabel.Location = new System.Drawing.Point(21, 29);
+            this.FOVLabel.Name = "FOVLabel";
+            this.FOVLabel.Size = new System.Drawing.Size(28, 13);
+            this.FOVLabel.TabIndex = 5;
+            this.FOVLabel.Text = "FOV";
             // 
-            // trackBarZoom
+            // FOVTrackBar
             // 
-            this.trackBarZoom.Location = new System.Drawing.Point(61, 28);
-            this.trackBarZoom.Maximum = 300;
-            this.trackBarZoom.Name = "trackBarZoom";
-            this.trackBarZoom.Size = new System.Drawing.Size(104, 45);
-            this.trackBarZoom.TabIndex = 4;
-            this.trackBarZoom.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarZoom.Value = 100;
-            this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
+            this.FOVTrackBar.Location = new System.Drawing.Point(61, 28);
+            this.FOVTrackBar.Maximum = 300;
+            this.FOVTrackBar.Name = "FOVTrackBar";
+            this.FOVTrackBar.Size = new System.Drawing.Size(104, 45);
+            this.FOVTrackBar.TabIndex = 4;
+            this.FOVTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.FOVTrackBar.Value = 100;
+            this.FOVTrackBar.Scroll += new System.EventHandler(this.FOVTrackBar_Scroll);
             // 
-            // checkBox1
+            // boundingBoxCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(24, 80);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(120, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Show bounding box";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.boundingBoxCheckBox.AutoSize = true;
+            this.boundingBoxCheckBox.Location = new System.Drawing.Point(24, 80);
+            this.boundingBoxCheckBox.Name = "boundingBoxCheckBox";
+            this.boundingBoxCheckBox.Size = new System.Drawing.Size(120, 17);
+            this.boundingBoxCheckBox.TabIndex = 0;
+            this.boundingBoxCheckBox.Text = "Show bounding box";
+            this.boundingBoxCheckBox.UseVisualStyleBackColor = true;
+            this.boundingBoxCheckBox.CheckedChanged += new System.EventHandler(this.boundingBoxCheckBox_CheckedChanged);
             // 
             // skyParams
             // 
@@ -431,6 +429,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lighting";
             // 
+            // directionalExpTB
+            // 
+            this.directionalExpTB.Location = new System.Drawing.Point(67, 160);
+            this.directionalExpTB.Maximum = 100;
+            this.directionalExpTB.Name = "directionalExpTB";
+            this.directionalExpTB.Size = new System.Drawing.Size(140, 45);
+            this.directionalExpTB.TabIndex = 13;
+            this.directionalExpTB.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.directionalExpTB.Value = 30;
+            this.directionalExpTB.Scroll += new System.EventHandler(this.directionalExpTB_Scroll);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 160);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "exponent";
+            // 
             // constantTB
             // 
             this.constantTB.Location = new System.Drawing.Point(65, 206);
@@ -552,26 +570,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Scattered";
             // 
-            // directionalExpTB
-            // 
-            this.directionalExpTB.Location = new System.Drawing.Point(67, 160);
-            this.directionalExpTB.Maximum = 100;
-            this.directionalExpTB.Name = "directionalExpTB";
-            this.directionalExpTB.Size = new System.Drawing.Size(140, 45);
-            this.directionalExpTB.TabIndex = 13;
-            this.directionalExpTB.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.directionalExpTB.Value = 30;
-            this.directionalExpTB.Scroll += new System.EventHandler(this.directionalExpTB_Scroll);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 160);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 13);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "exponent";
-            // 
             // rendererControl
             // 
             this.rendererControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -597,7 +595,7 @@
             this.tabControl1.ResumeLayout(false);
             this.renderParams.ResumeLayout(false);
             this.renderParams.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FOVTrackBar)).EndInit();
             this.skyParams.ResumeLayout(false);
             this.skyParams.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exposureTrackBar)).EndInit();
@@ -616,12 +614,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.frequencyTB)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.directionalExpTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.constantTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.directionalMaxTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.directionalMinTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMaxTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scatteredMinTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.directionalExpTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -633,9 +631,9 @@
         private System.Windows.Forms.TabPage skyParams;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabPage renderParams;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TrackBar trackBarZoom;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label FOVLabel;
+        private System.Windows.Forms.TrackBar FOVTrackBar;
+        private System.Windows.Forms.CheckBox boundingBoxCheckBox;
         private System.Windows.Forms.GroupBox sunGroupBox;
         private System.Windows.Forms.TrackBar phiTrackBar;
         private System.Windows.Forms.Label phiLabel;
