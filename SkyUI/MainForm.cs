@@ -26,8 +26,8 @@ namespace Skyfall
         {
             for (int i = 0; i < 100; i++)
             {
-                phis[i] = (float) Math.PI * 0.25f + (i / 100.0f) * (float) Math.PI;
-                thetas[i] = (float) (90.0f - 80.0f * Math.Sin((i / 100.0f) * (float) Math.PI)) * (float) Math.PI / 180.0f;
+                phis[i] = (float) Math.PI + (i / 100.0f) * (float) Math.PI;
+                thetas[i] = (float) (90.0f - 60.0f * Math.Sin((i / 100.0f) * (float) Math.PI)) * (float) Math.PI / 180.0f;
             }
         }
 
@@ -53,8 +53,8 @@ namespace Skyfall
 
         private void UpdateRenderControl()
         {
-			rendererControl.RenderBoundingBox = checkBox1.Checked;
-            rendererControl.FOV = 0.5f + 1.5f * trackBarZoom.Value / (float) trackBarZoom.Maximum;
+			rendererControl.RenderBoundingBox = boundingBoxCheckBox.Checked;
+            rendererControl.FOV = 0.5f + 1.5f * FOVTrackBar.Value / (float) FOVTrackBar.Maximum;
 
             //rendererControl.SkyDome.ThetaSun = (thetaTrackBar.Value / 100.0f) * (float)Math.PI;
             //rendererControl.SkyDome.PhiSun = (phiTrackBar.Value / 100.0f) * (float)Math.PI * 2.0f;
@@ -86,16 +86,6 @@ namespace Skyfall
         }
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateRenderControl();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateRenderControl();
-        }
-
-        private void trackBarZoom_Scroll(object sender, EventArgs e)
         {
             UpdateRenderControl();
         }
@@ -176,6 +166,16 @@ namespace Skyfall
         }
 
         private void directionalExpTB_Scroll(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void boundingBoxCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateRenderControl();
+        }
+
+        private void FOVTrackBar_Scroll(object sender, EventArgs e)
         {
             UpdateRenderControl();
         }
